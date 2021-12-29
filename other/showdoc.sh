@@ -11,7 +11,9 @@ echo "当前时间${currentdate}"
 
 UpgradeShowdoc(){
     echo "开始备份..."
+    chown -R ${run_user}.${run_user} ${bk_dir}
     cp -rfv ${showdoc_dir} ${bk_dir}/showdoc_${currentdate}
+    chmod -R 777 ${bk_dir}/*
     echo "备份完成"
 
     #切换到备份目录开始升级
@@ -51,6 +53,7 @@ while :; do echo
         echo "输入的目录不合法！"     
     elif [ ! -d "${bk_dir}" ]; then
         mkdir ${bk_dir}
+
     else
         echo "你的showdoc备份目录：${bk_dir}"
         break
